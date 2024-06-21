@@ -28,7 +28,7 @@ public class Main {
                 System.out.println(arr);
             }
 
-            if(httpRequest[1].contains("/echo/abc")){
+            if(httpRequest[1].contains("/echo")){
                 String[] url = httpRequest[1].split("/");
                 output.write(("HTTP/1.1 200 OK\r\n\r\nContent-Type: text/plain\r\n\r\nbContent-Length: 3\r\n\r\n" + url[1]).getBytes());
 
