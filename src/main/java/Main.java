@@ -22,7 +22,6 @@ public class Main {
 
 
             String input = reader.readLine();
-            System.out.println("bytes : " + input);
             String[] httpRequest = input.split(" ");
 
             for(String arr : httpRequest){
@@ -30,14 +29,15 @@ public class Main {
             }
 
             if(httpRequest[1].contains("/echo/abc")){
-                output.write("HTTP/1.1 200 OK\r\n\r\nContent-Type: text/plain\r\n\r\nbContent-Length: 3\r\n\r\nabc".getBytes());
-            } else if (httpRequest[1].equals("/echo/abc")) {
+                String[] url = httpRequest[1].split("/");
+                output.write(("HTTP/1.1 200 OK\r\n\r\nContent-Type: text/plain\r\n\r\nbContent-Length: 3\r\n\r\n" + url[1]).getBytes());
+
+            } else if (httpRequest[1].equals("/")) {
                 output.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
             } else{
                 output.write("HTTP/1.1 404 Not Found\r\n\r\n".getBytes());
             }
 
-            System.out.println("accepted new connection");
         } catch (IOException e) {
             System.out.println("IOException: " + e.getMessage());
         }
