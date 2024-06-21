@@ -22,14 +22,18 @@ public class Main {
 
 
             String input = reader.readLine();
+            System.out.println("bytes : " + input);
             String[] httpRequest = input.split(" ");
 
             for(String arr : httpRequest){
                 System.out.println(arr);
             }
-            if(httpRequest[1].equals("/")){
+
+            if(httpRequest[1].contains("/echo/abc")){
+                output.write("HTTP/1.1 200 OK\r\n\r\nContent-Type: text/plain\r\n\r\nbContent-Length: 3\r\n\r\nabc".getBytes());
+            } else if (httpRequest[1].equals("/echo/abc")) {
                 output.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
-            }else{
+            } else{
                 output.write("HTTP/1.1 404 Not Found\r\n\r\n".getBytes());
             }
 
@@ -39,3 +43,5 @@ public class Main {
         }
     }
 }
+
+
