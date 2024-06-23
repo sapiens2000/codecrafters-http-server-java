@@ -29,17 +29,15 @@ public class Main {
                 System.out.println(arr);
             }
 
-            if(httpRequest[1].contains("/echo")){
-                String[] url = httpRequest[1].split("/");
-                output.write(("HTTP/1.1 200 OK\r\n\r\nContent-Type: text/plain\r\n\r\nbContent-Length: 3\r\n\r\n" + url[1]).getBytes());
+            if(httpRequest[1].startsWith("/echo/")){
+                String queryParam = httpRequest[1].split("/")[2];
+                System.out.println(queryParam);
 
-//                outputWriter.println("HTTP/1.1 200 OK");
-//                outputWriter.println("Content-Type: text/plain");
-//                outputWriter.println("Content-Length: 3");
-//                outputWriter.println(url[1]);
-
-
-
+                output.write(
+                        ("HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: " +
+                                queryParam.length() + "\r\n\r\n" + queryParam)
+                                .getBytes());
+                System.out.println(("HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: " + queryParam.length() + "\r\n\r\n" + queryParam));
             } else if (httpRequest[1].equals("/")) {
                 output.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
             } else{
